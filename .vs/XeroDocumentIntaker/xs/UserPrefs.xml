@@ -1,0 +1,39 @@
+﻿<Properties StartupConfiguration="{CD8AB66E-5B5E-4ACF-AFAE-98FDA11FC367}|Default">
+  <MonoDevelop.Ide.ItemProperties.XeroDocumentIntaker PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="XeroDocumentIntaker/Startup.cs">
+    <Files>
+      <File FileName="XeroDocumentIntaker/Controllers/WeatherForecastController.cs" Line="1" Column="1" />
+      <File FileName="XeroDocumentIntaker/ClientApp/src/registerServiceWorker.ts" />
+      <File FileName="XeroDocumentIntaker/Program.cs" />
+      <File FileName="XeroDocumentIntaker/ClientApp/public/index.html" />
+      <File FileName="XeroDocumentIntaker/Pages/_ViewImports.cshtml" />
+      <File FileName="XeroDocumentIntaker/Pages/Error.cshtml" />
+      <File FileName="XeroDocumentIntaker/Startup.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="XeroDocumentIntaker" expanded="True">
+            <Node name="XeroDocumentIntaker" expanded="True">
+              <Node name="ClientApp" expanded="True">
+                <Node name="public" expanded="True" />
+                <Node name="src" expanded="True">
+                  <Node name="components" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Controllers" expanded="True" />
+              <Node name="Pages" expanded="True" />
+              <Node name="Startup.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
