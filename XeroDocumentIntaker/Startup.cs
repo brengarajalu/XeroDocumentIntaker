@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using XeroDocumentIntaker.Models;
+using XeroDocumentIntaker.Service;
 
 namespace XeroDocumentIntaker
 {
@@ -15,6 +17,10 @@ namespace XeroDocumentIntaker
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            using (var client = new ReportDBContext())
+            {
+                client.Database.EnsureCreated();
+            }
         }
 
         public IConfiguration Configuration { get; }
@@ -22,8 +28,8 @@ namespace XeroDocumentIntaker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<ReportDBContext>(opt =>
-            //  opt.UseInMemoryDatabase("ReportDBContext"));
+            services.AddEntityFrameworkSqlite().AddDbContext<ReportDBContext>();
+            services.AddTransient<IReportService, ReportService>();
             services.AddControllersWithViews();
             services.AddControllers();
 
@@ -32,6 +38,10 @@ namespace XeroDocumentIntaker
             {
                 configuration.RootPath = "ClientApp/build";
             });
+            //services.Configure<FormOptions>(options =>
+            //{
+            //    options.MultipartBodyLengthLimit = 60000000000;//60M
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

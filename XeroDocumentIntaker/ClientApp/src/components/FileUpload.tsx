@@ -1,23 +1,41 @@
 ﻿import React from 'react';
 import axios from 'axios';
 
+
+interface IProps {
+    superhero: string;
+}
+
+interface IState {
+    selectedFile: number;
+}
+
 class Fileupload extends React.Component {
 
+ 
+    readonly state = { selectedFile: '', uploadedBy:'' };
+
+   
     constructor(props : any) {
         super(props);
         this.state = {
-            file: '',
+            selectedFile: '',
+            uploadedBy: ''
+     
         };
     }
 
     async submit(e : any) {
         e.preventDefault();
-        const url = `http://localhost:5001/api/Uploadfiles/Uploadfile`;
+        const url = `https://localhost:5001/api/Upload/upload`;
         const formData = new FormData();
-        //formData.append('body', this.state.file);
+        formData.append("formFile", this.state.selectedFile);
+        formData.append("uploadedBy", this.state.uploadedBy);
         const config = {
             headers: {
-                'content-type': 'multipart/form-data',
+                //'content-type': 'multipart/form-data',
+                'content-type': 'application/x-www-form-urlencoded',
+                
                 'token': 'xxxx'                //withCredentials: true
             },
         };
@@ -29,7 +47,8 @@ class Fileupload extends React.Component {
         return HTTP.post(url, formData, config);
     }
     setFile(e:any) {
-        this.setState({ file: e.target.files[0] });
+        this.setState({ selectedFile: e.target.files[0] });
+        this.setState({ uploadedBy: e.target.files[0].name });
     }
 
     render() {
@@ -42,6 +61,7 @@ class Fileupload extends React.Component {
                     <h1>File Upload</h1>
                     <input type="file" onChange={e => this.setFile(e)} />
                     <button className="btn btn-primary" type="submit">Upload</button>
+             
                 </form>
             </div>
         )

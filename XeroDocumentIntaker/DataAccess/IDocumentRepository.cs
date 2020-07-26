@@ -4,10 +4,10 @@ using XeroDocumentIntaker.Models;
 
 namespace XeroDocumentIntaker.DataAccess
 {
-    public interface IDataAccess
+    public interface IDocumentRepository
     {
         public int SaveReport(Report report);
         public Report GetReportById(long id);
-        public System.Linq.IQueryable<Report> GetAllReports();
+        public List<Report> GetAllReports();
     }
 }

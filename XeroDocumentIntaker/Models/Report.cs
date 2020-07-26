@@ -3,8 +3,11 @@ namespace XeroDocumentIntaker.Models
 {
     public class Report
     {
-        public Report()
+        public Report(String createdBy)
         {
+            this.UploadedBy = createdBy;
+        }
+        public Report() {
         }
         public long Id { get; set; }
         public DateTime CreatedDate { get; set; }
