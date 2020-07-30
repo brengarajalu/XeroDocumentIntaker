@@ -15,19 +15,32 @@ namespace XeroDocumentIntaker.DataAccess
         }
         public int SaveReport(Report report)
         {
+            report.CreatedDate = DateTime.Now;
             this.context.Report.Add(report);
             return this.context.SaveChanges();
+            //foreach (ReportDetail rd in report.ReportDetails)
+            //{
+            //    this.context.ReportDetail.Add(rd);
+            //}
+            //return this.context.SaveChanges();
 
            
         }
         public Report GetReportById(long id)
         {
-            return this.context.Report.Find(id);
+            Report rep =  this.context.Report.Find(id);
+            rep.ReportDetails = this.context.ReportDetail.Where(x => x.ReportId == id).First();
+            return rep;
         }
         public List<Report> GetAllReports()
         {
-
-            return this.context.Report.ToList();
+            List<Report> lstReport = this.context.Report.ToList();
+            foreach(Report rep in lstReport)
+            {
+                rep.ReportDetails = this.context.ReportDetail.Where(x => x.ReportId == rep.Id).First();
+            }
+            
+            return lstReport;
         }
 
         private bool disposed = false;

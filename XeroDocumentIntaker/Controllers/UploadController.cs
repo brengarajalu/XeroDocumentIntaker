@@ -35,12 +35,14 @@ namespace XeroDocumentIntaker.Controllers
             {
                 IFormFile file = request.Form.Files.First();
                 String path = Path.Combine(Directory.GetCurrentDirectory(),file.FileName);
+                String outputPath = Path.Combine(Directory.GetCurrentDirectory(), "converted.txt");
                 using (Stream st = new FileStream(path, FileMode.Create))
                 {
                     file.CopyTo(st);
                 }
-                ReportHelper.ConvertPDFToText(path);
-
+                ReportHelper.ConvertPDFToText(path + "  " + outputPath);
+                Report rep = ReportHelper.ExtractReport(outputPath, UploadedBy);
+                _reportService.SaveReport(rep);
 
 
                 return Ok("file uploaded successfully");
@@ -49,8 +51,6 @@ namespace XeroDocumentIntaker.Controllers
 
         }
 
-
-        // GET api/values/5
         [HttpGet("{id}")]
         [Route("document")]
         public Report GetReportById(long id)
@@ -58,25 +58,12 @@ namespace XeroDocumentIntaker.Controllers
             return this._reportService.GetReportById(id);
         }
 
-        // POST api/values
-        [HttpPost]
-        [Route("test")]
-        public IActionResult Post([FromForm]string value)
+        [Route("stats")]
+        public List<FileUploadStatics> GetStatistics()
         {
-            return Ok(value);
-
+            return this._reportService.GetStatistics();
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+      
     }
 }

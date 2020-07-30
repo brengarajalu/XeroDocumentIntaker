@@ -9,7 +9,7 @@ namespace XeroDocumentIntaker.Service
 
           public int SaveReport(Report report);
           public Report GetReportById(long id);
-          public List<Report> GetAllReports();
+          public List<FileUploadStatics> GetStatistics();
         
     }
 }

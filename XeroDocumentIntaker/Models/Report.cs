@@ -12,6 +12,7 @@ namespace XeroDocumentIntaker.Models
         public long Id { get; set; }
         public DateTime CreatedDate { get; set; }
         public String UploadedBy { get; set; }
-        public System.Collections.Generic.List<ReportDetail> reportDetails { get; set; }
+        public long FileSize { get; set; }
+        public ReportDetail ReportDetails { get; set; }
     }
 }

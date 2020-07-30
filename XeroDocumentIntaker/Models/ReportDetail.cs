@@ -7,6 +7,7 @@ namespace XeroDocumentIntaker.Models
         {
         }
         public long Id { get; set; }
+        public long ReportId { get; set; }
         public String Vendor { get; set; }
         public String InvoiceDate { get; set; }
         public Decimal TotalAmount { get; set; }

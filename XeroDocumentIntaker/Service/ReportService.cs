@@ -21,14 +21,26 @@ namespace XeroDocumentIntaker.Service
         }
         public Report GetReportById(long id)
         {
+   
             return this.documentRepository.GetReportById(id);
         }
 
-        public List<Report> GetAllReports()
+        public List<FileUploadStatics> GetStatistics()
         {
-            return this.documentRepository.GetAllReports().ToList<Report>();
+            List<FileUploadStatics> uploadStatics = new List<FileUploadStatics>();
+            uploadStatics = this.documentRepository.GetAllReports()
+            .GroupBy(x => x.UploadedBy).Select(g => new FileUploadStatics()
+            {
+                id = g.Select(x=>x.Id).First(),
+                UploadedBy = g.Select(x=>x.UploadedBy).First(),
+                fileCount = g.Count(),
+                totalfileSize = g.Sum(x => x.FileSize),
+                totalAmount = g.Sum(x => x.ReportDetails.TotalAmount),
+                totalAmountDue = g.Sum(x => x.ReportDetails.TotalAmountDue)
+            }).ToList();
+            return uploadStatics;
         }
-
+        
        
     }
 }

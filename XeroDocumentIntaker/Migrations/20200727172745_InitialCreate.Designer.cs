@@ -9,7 +9,7 @@ using XeroDocumentIntaker.Models;
 namespace XeroDocumentIntaker.Migrations
 {
     [DbContext(typeof(ReportDBContext))]
-    [Migration("20200724211008_InitialCreate")]
+    [Migration("20200727172745_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,6 +26,9 @@ namespace XeroDocumentIntaker.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("TEXT");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UploadedBy")
                         .HasColumnType("TEXT");
@@ -47,7 +50,7 @@ namespace XeroDocumentIntaker.Migrations
                     b.Property<string>("InvoiceDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<long?>("ReportId")
+                    b.Property<long>("ReportId")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Tax")
@@ -72,8 +75,10 @@ namespace XeroDocumentIntaker.Migrations
             modelBuilder.Entity("XeroDocumentIntaker.Models.ReportDetail", b =>
                 {
                     b.HasOne("XeroDocumentIntaker.Models.Report", null)
-                        .WithMany("reportDetails")
-                        .HasForeignKey("ReportId");
+                        .WithMany("ReportDetails")
+                        .HasForeignKey("ReportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -14,7 +14,8 @@ namespace XeroDocumentIntaker.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
-                    UploadedBy = table.Column<string>(nullable: true)
+                    UploadedBy = table.Column<string>(nullable: true),
+                    FileSize = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,13 +28,13 @@ namespace XeroDocumentIntaker.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    ReportId = table.Column<long>(nullable: false),
                     Vendor = table.Column<string>(nullable: true),
                     InvoiceDate = table.Column<string>(nullable: true),
                     TotalAmount = table.Column<decimal>(nullable: false),
                     TotalAmountDue = table.Column<decimal>(nullable: false),
                     Currency = table.Column<string>(nullable: true),
-                    Tax = table.Column<decimal>(nullable: false),
-                    ReportId = table.Column<long>(nullable: true)
+                    Tax = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,7 +44,7 @@ namespace XeroDocumentIntaker.Migrations
                         column: x => x.ReportId,
                         principalTable: "Report",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

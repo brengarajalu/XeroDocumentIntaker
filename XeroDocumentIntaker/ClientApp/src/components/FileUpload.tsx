@@ -48,7 +48,12 @@ class Fileupload extends React.Component {
     }
     setFile(e:any) {
         this.setState({ selectedFile: e.target.files[0] });
-        this.setState({ uploadedBy: e.target.files[0].name });
+    }
+
+    setUploadedBy(e: any) {
+        if (this != undefined)
+
+            this.setState({ uploadedBy: e.target.value });
     }
 
     render() {
@@ -58,9 +63,14 @@ class Fileupload extends React.Component {
                     <div className="col-sm-12 btn btn-primary">
                         File Upload
                         </div>
-                    <h1>File Upload</h1>
+                    <br /> <br />
+         
                     <input type="file" onChange={e => this.setFile(e)} />
                     <button className="btn btn-primary" type="submit">Upload</button>
+                    <br /> 
+                    Uploaded By &nbsp;
+                    <input type="text" value={this.state.uploadedBy} onChange={e=> this.setUploadedBy(e)} />
+                    <br />
              
                 </form>
             </div>

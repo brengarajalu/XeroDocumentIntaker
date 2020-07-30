@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using XeroDocumentIntaker.Models;
 using System.IO;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace XeroDocumentIntaker.Utils
 {
@@ -23,7 +25,7 @@ namespace XeroDocumentIntaker.Utils
                     StartInfo = new ProcessStartInfo
                     {
                         FileName = "pdftotext",
-                        Arguments = escapedArgs,
+                        Arguments = escapedArgs + "  " + "-layout",
                         RedirectStandardOutput = true,
                         UseShellExecute = false,
                         CreateNoWindow = true,
@@ -40,21 +42,98 @@ namespace XeroDocumentIntaker.Utils
 
         }
 
-        //Read text from pdf converted text file 
-        public static void ReadFromFile(String filePath)
+
+        public static Report ExtractReport(String filePath, String uploadedBy)
         {
+            Report rep = new Report();
+            rep.ReportDetails = new ReportDetail();
+            rep.UploadedBy = uploadedBy;
+            ReadFromFile(rep,filePath);
+            return rep;
+
+        }
+
+        private static String[] ParseTabularData(String line)
+        {
+            return System.Text.RegularExpressions.Regex.Split(line, @"\s{2,}");
+        }
+
+
+        //Read text from pdf converted text file 
+        public static void ReadFromFile(Report report, String filePath)
+        {
+            ReportDetail rep = new ReportDetail();
+
             // Read file using StreamReader. Reads file line by line    
             using (StreamReader file = new StreamReader(filePath))
             {
-                int counter = 0;
+                report.FileSize = file.BaseStream.Length;
+                int lineCount = 0;
                 string ln;
-
+                String prevline = String.Empty;
                 while ((ln = file.ReadLine()) != null)
                 {
-                    Console.WriteLine(ln);
-                    counter++;
+                    ln = ln.Trim();
+                    if (ln != "")
+                    {
+                        if (lineCount == 3)
+                        {
+                            rep.InvoiceDate = ParseTabularData(ln)[1];
+                        }
+                        if (lineCount == 4)
+                        {
+                            rep.Vendor = ln;
+                        }
+
+                        if (ln.StartsWith("Tax"))
+                        {
+                            //tax
+                            String[] cols = ParseTabularData(ln);
+                            String taxString = Regex.Match(cols[1], @"\d+.+\d").Value;
+                            Decimal.TryParse(taxString, out decimal result);
+                            rep.Tax = result;
+
+                        }
+                        if (ln.StartsWith("Paid"))
+                        {
+                            //tax
+                            String[] cols = ParseTabularData(ln);
+                            String taxString = Regex.Match(cols[1], @"\d+.+\d").Value;
+                            Decimal.TryParse(taxString, out decimal result);
+                            rep.TotalAmount = result;
+                            prevline =  "Paid";
+
+                        }
+                        if (prevline == "Paid")
+                        {
+                            //tax
+                            String[] cols = ParseTabularData(ln);
+                            String taxString = Regex.Match(cols[0], @"\d+.+\d").Value;
+                            Decimal.TryParse(taxString, out decimal result);
+                            rep.TotalAmountDue = result;
+                            prevline = "";
+
+                        }
+
+                        if (prevline == "Total Due")
+                        {
+                            rep.Currency = ln;
+                            prevline = "";
+                        }
+
+                        if (ln.StartsWith("Total Due"))
+                        {
+                            prevline = "Total Due";
+                        } 
+                  
+                        lineCount++;
+
+                    }
+                   
                 }
                 file.Close();
+                report.ReportDetails = rep;
+              
             }
         }
 
