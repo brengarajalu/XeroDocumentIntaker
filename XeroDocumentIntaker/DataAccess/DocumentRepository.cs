@@ -2,42 +2,53 @@
 using XeroDocumentIntaker.Models;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace XeroDocumentIntaker.DataAccess
 {
     public class DocumentRepository : IDocumentRepository, IDisposable
     {
-        private ReportDBContext context;
+        private readonly ReportDBContext _context;
 
         public DocumentRepository(ReportDBContext context)
         {
-            this.context = context;
+            this._context = context;
         }
+
+        /// <summary>
+        /// Save report object to datastore
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns></returns>
         public int SaveReport(Report report)
         {
             report.CreatedDate = DateTime.Now;
-            this.context.Report.Add(report);
-            return this.context.SaveChanges();
-            //foreach (ReportDetail rd in report.ReportDetails)
-            //{
-            //    this.context.ReportDetail.Add(rd);
-            //}
-            //return this.context.SaveChanges();
-
-           
+            this._context.Report.Add(report);
+            return this._context.SaveChanges();
         }
+
+        /// <summary>
+        /// Get report by report 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Report GetReportById(long id)
         {
-            Report rep =  this.context.Report.Find(id);
-            rep.ReportDetails = this.context.ReportDetail.Where(x => x.ReportId == id).First();
+            Report rep =  this._context.Report.Find(id);
+            rep.ReportDetails = this._context.ReportDetail.Where(x => x.ReportId == id).FirstOrDefault();
             return rep;
         }
-        public List<Report> GetAllReports()
+
+        /// <summary>
+        /// Get Report Statistics
+        /// </summary>
+        /// <returns></returns>
+        public List<Report> GetReportStatistics()
         {
-            List<Report> lstReport = this.context.Report.ToList();
+            List<Report> lstReport = this._context.Report.ToList();
             foreach(Report rep in lstReport)
             {
-                rep.ReportDetails = this.context.ReportDetail.Where(x => x.ReportId == rep.Id).First();
+                rep.ReportDetails = this._context.ReportDetail.Where(x => x.ReportId == rep.Id).FirstOrDefault();
             }
             
             return lstReport;
@@ -51,7 +62,7 @@ namespace XeroDocumentIntaker.DataAccess
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    _context.Dispose();
                 }
             }
             this.disposed = true;

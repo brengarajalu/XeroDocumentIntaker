@@ -4,11 +4,14 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using XeroDocumentIntaker.ErrorHandler;
 using XeroDocumentIntaker.Models;
 using XeroDocumentIntaker.Service;
+using XeroDocumentIntaker.DataAccess;
 
 namespace XeroDocumentIntaker
 {
@@ -30,8 +33,11 @@ namespace XeroDocumentIntaker
         {
             services.AddEntityFrameworkSqlite().AddDbContext<ReportDBContext>();
             services.AddTransient<IReportService, ReportService>();
+            services.AddScoped<IDocumentRepository, DocumentRepository>();
             services.AddControllersWithViews();
             services.AddControllers();
+            services.AddControllers(options =>
+            options.Filters.Add(new ReportExceptionFilter()));
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -68,6 +74,7 @@ namespace XeroDocumentIntaker
             {
                 endpoints.MapControllerRoute(
                     name: "default",
+                   
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 

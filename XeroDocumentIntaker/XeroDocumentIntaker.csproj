@@ -39,6 +39,7 @@
     <Folder Include="DataAccess\" />
     <Folder Include="Utils\" />
     <Folder Include="Service\" />
+    <Folder Include="ErrorHandler\" />
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->

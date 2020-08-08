@@ -3,14 +3,17 @@ using Microsoft.AspNetCore.Http;
 
 namespace XeroDocumentIntaker.Models
 {
+    /// <summary>
+    /// Model for Statistics
+    /// </summary>
     public class FileUploadStatics
     {
-        public long id { get; set; }
+        public long Id { get; set; }
         public string UploadedBy { get; set; }
-        public long fileCount { get; set; }
-        public long totalfileSize { get; set; }
-        public decimal totalAmount { get; set; }
-        public decimal totalAmountDue { get; set; }
+        public long FileCount { get; set; }
+        public long TotalfileSize { get; set; }
+        public decimal TotalAmount { get; set; }
+        public decimal TotalAmountDue { get; set; }
         public FileUploadStatics()
         {
 

@@ -1,9 +1,10 @@
 ﻿import React, { Component } from 'react'
 import ReactTable from 'react-table';
-import useRowSelect from 'react-table';
 import Modal from 'react-modal';
 import "react-table/react-table.css";
 import axios from 'axios';
+
+const baseRestAPIPath = "https://localhost:5001/api";
 
 const divStyleBlock = {
     display: 'block' as const,
@@ -13,7 +14,6 @@ const divStyleNone = {
     display: 'none' as const,
 
 };
-
 
 const customStyles = {
     content: {
@@ -27,20 +27,12 @@ const customStyles = {
 };
 
 
-interface IState {
-    health: number;
-}
-
-class ThreatReportTable extends React.Component {
-
-   
+class ReactTableView extends React.Component {
     readonly state = {
         reports: [], selectedDetail: { reportDetails: {}}, reportDetails: [], selected: '', showInfo: false, hideInfo: true };
 
-
-
-    getDetailedInfo(id:any) {
-        axios.get("https://localhost:5001/api/upload/stats").then(response => {
+    getDetailedInfo(id: any) {
+        axios.get(baseRestAPIPath + "/upload/stats").then(response => {
             //console.log(response.data);  
             this.setState({
                 reports: response.data
@@ -51,24 +43,18 @@ class ThreatReportTable extends React.Component {
     handleButtonClick = (source, e) => {
 
         this.setState({ showInfo: true });
-        axios.get("https://localhost:5001/api/upload/document?id=" + source.id).then(response => {
+        axios.get(baseRestAPIPath+"/upload/document?id=" + source.id).then(response => {
             //console.log(response.data);
             this.setState({ selectedDetail: response.data });
-            
-            console.log(this.state.selectedDetail);
+      
+            //console.log(this.state.selectedDetail);
         });
     }; 
 
   
     componentDidMount() {
         Modal.setAppElement('body');
-        axios.get("https://localhost:5001/api/upload/stats").then(response => {
-            //console.log(response.data);  
-            this.setState({
-                reports: response.data,
-                showInfo : false
-            });
-        });
+        this.getStats();
     }  
 
     constructor(props:any) {    
@@ -77,6 +63,16 @@ class ThreatReportTable extends React.Component {
         this.closeModal = this.closeModal.bind(this);
 
    
+    }
+
+    getStats() {
+        axios.get(baseRestAPIPath + "/upload/stats").then(response => {
+            //console.log(response.data);  
+            this.setState({
+                reports: response.data,
+                showInfo: false
+            });
+        });
     }
 
     renderDetailedInfo() {
@@ -198,17 +194,19 @@ class ThreatReportTable extends React.Component {
                  
                     defaultPageSize={2}
                     
-                    pageSizeOptions={[2, 4, 6]}
+                    pageSizeOptions={[2, 4, 6, 10]}
                 />
-                    <Modal isOpen={this.state.showInfo}
+                <Modal isOpen={this.state.showInfo}
                         style={customStyles}
                         contentLabel="Example Modal"
                     onRequestClose={this.closeModal}>
-                   
+                    <button style={buttonStyle} onClick={this.closeModal}>close</button>
                     <table id="reports">
-                        <thead><tr><th>Vendor</th><th>InvoiceDate</th><th>Tax</th><th>TotalAmount</th><th>TotalAmountDue</th></tr></thead>
-                            <tbody>
+                        <thead><tr><th>UploadedBy</th><th>Vendor</th><th>InvoiceDate</th><th>Tax</th><th>TotalAmount</th><th>TotalAmountDue</th></tr></thead>
+                        <tbody>
+                                
                                 <tr>
+                                <td>{this.state.selectedDetail["uploadedBy"]}</td>
                                 <td>{this.state.selectedDetail.reportDetails["vendor"]}</td>
                                 <td>{this.state.selectedDetail.reportDetails["invoiceDate"]}</td>
                                 <td>{this.state.selectedDetail.reportDetails["Tax"]}</td>
@@ -219,7 +217,7 @@ class ThreatReportTable extends React.Component {
                     </table>
                    
                    
-                    <button style={buttonStyle} onClick={this.closeModal}>close</button>
+                    
                 </Modal>
 
               
@@ -232,4 +230,4 @@ class ThreatReportTable extends React.Component {
 }
 
 
-export default ThreatReportTable;
+export default ReactTableView;

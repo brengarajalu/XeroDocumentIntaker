@@ -1,31 +1,71 @@
 ﻿<Properties StartupConfiguration="{CD8AB66E-5B5E-4ACF-AFAE-98FDA11FC367}|Default">
   <MonoDevelop.Ide.ItemProperties.XeroDocumentIntaker PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="XeroDocumentIntaker/Startup.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="XeroDocumentIntaker/Utils/constants.cs">
     <Files>
-      <File FileName="XeroDocumentIntaker/Controllers/WeatherForecastController.cs" Line="1" Column="1" />
-      <File FileName="XeroDocumentIntaker/ClientApp/src/registerServiceWorker.ts" />
-      <File FileName="XeroDocumentIntaker/Program.cs" />
-      <File FileName="XeroDocumentIntaker/ClientApp/public/index.html" />
-      <File FileName="XeroDocumentIntaker/Pages/_ViewImports.cshtml" />
-      <File FileName="XeroDocumentIntaker/Pages/Error.cshtml" />
-      <File FileName="XeroDocumentIntaker/Startup.cs" Line="1" Column="1" />
+      <File FileName="XeroDocumentIntaker/ClientApp/src/components/ReactTableView.tsx" Line="197" Column="42" />
+      <File FileName="XeroDocumentIntaker/ClientApp/src/App.tsx" Line="24" Column="2" />
+      <File FileName="XeroDocumentIntaker/Program.cs" Line="23" Column="31" />
+      <File FileName="XeroDocumentIntaker/Startup.cs" Line="30" Column="1" />
+      <File FileName="XeroDocumentIntaker/launchSettings.json" Line="14" Column="67" />
+      <File FileName="XeroDocumentIntaker/appsettings.json" Line="14" Column="1" />
+      <File FileName="XeroDocumentIntaker/ClientApp/package.json" Line="1" Column="1" />
+      <File FileName="XeroDocumentIntaker/ClientApp/tsconfig.json" Line="1" Column="1" />
+      <File FileName="XeroDocumentIntaker/ClientApp/README.md" Line="1" Column="1" />
+      <File FileName="XeroDocumentIntaker/XeroDocumentIntaker.csproj" Line="30" Column="14" />
+      <File FileName="XeroDocumentIntaker/Controllers/UploadController.cs" Line="28" Column="64" />
+      <File FileName="XeroDocumentIntaker/ClientApp/src/components/FileUpload.tsx" Line="75" Column="23" />
+      <File FileName="XeroDocumentIntaker/ClientApp/src/components/Home.tsx" Line="1" Column="1" />
+      <File FileName="XeroDocumentIntaker/ClientApp/src/components/Model.css" Line="1" Column="1" />
+      <File FileName="XeroDocumentIntaker/ClientApp/src/components/NavMenu.css" Line="1" Column="1" />
+      <File FileName="XeroDocumentIntaker/ClientApp/src/components/NavMenu.tsx" Line="1" Column="1" />
+      <File FileName="XeroDocumentIntaker/Models/FileUploadStatics.cs" Line="4" Column="11" />
+      <File FileName="XeroDocumentIntaker/Models/Report.cs" Line="9" Column="10" />
+      <File FileName="XeroDocumentIntaker/Models/ReportDetail.cs" Line="1" Column="1" />
+      <File FileName="XeroDocumentIntaker/DataAccess/DocumentRepository.cs" Line="17" Column="1" />
+      <File FileName="XeroDocumentIntaker/Service/ReportService.cs" Line="88" Column="1" />
+      <File FileName="XeroDocumentIntaker/DataAccess/ReportDBContext.cs" Line="11" Column="43" />
+      <File FileName="XeroDocumentIntaker.tests/UnitTest1.cs" Line="92" Column="15" />
+      <File FileName="XeroDocumentIntaker/Utils/ReportHelper.cs" Line="48" Column="43" />
+      <File FileName="XeroDocumentIntaker/Utils/constants.cs" Line="5" Column="11" />
+      <File FileName="XeroDocumentIntaker.tests/UtilsTest.cs" Line="24" Column="11" />
+      <File FileName="XeroDocumentIntaker/Controllers/HomeController.cs" Line="1" Column="1" />
+      <File FileName="XeroDocumentIntaker.tests/XeroDocumentIntaker.tests.csproj" Line="19" Column="25" />
+      <File FileName="XeroDocumentIntaker/Controllers/ErrorController.cs" Line="1" Column="1" />
+      <File FileName="XeroDocumentIntaker/DataAccess/IDocumentRepository.cs" Line="7" Column="41" />
+      <File FileName="XeroDocumentIntaker/ErrorHandler/ReportExceptionFilter.cs" Line="1" Column="1" />
+      <File FileName="XeroDocumentIntaker/ErrorHandler/ReportGenerationException.cs" Line="5" Column="67" />
+      <File FileName="XeroDocumentIntaker/ErrorHandler/ReportProcessingException.cs" Line="5" Column="70" />
+      <File FileName="XeroDocumentIntaker/Service/IReportService.cs" Line="8" Column="6" />
+      <File FileName="XeroDocumentIntaker/Migrations/20200727172745_InitialCreate.Designer.cs" Line="7" Column="34" />
+      <File FileName="XeroDocumentIntaker/Migrations/ReportDBContextModelSnapshot.cs" Line="6" Column="38" />
+      <File FileName="XeroDocumentIntaker/appsettings.Development.json" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="XeroDocumentIntaker" expanded="True">
             <Node name="XeroDocumentIntaker" expanded="True">
-              <Node name="ClientApp" expanded="True">
-                <Node name="public" expanded="True" />
-                <Node name="src" expanded="True">
-                  <Node name="components" expanded="True" />
-                </Node>
-              </Node>
+              <Node name="ClientApp" expanded="True" />
               <Node name="Controllers" expanded="True" />
-              <Node name="Pages" expanded="True" />
-              <Node name="Startup.cs" selected="True" />
+              <Node name="DataAccess" expanded="True" />
+              <Node name="ErrorHandler" expanded="True" />
+              <Node name="Migrations" expanded="True">
+                <Node name="20200727172745_InitialCreate.cs" expanded="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Service" expanded="True" />
+              <Node name="Utils" expanded="True">
+                <Node name="Constants.cs" selected="True" />
+              </Node>
+              <Node name="appsettings.json" expanded="True" />
             </Node>
+            <Node name="XeroDocumentIntaker.tests" expanded="True" />
           </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="XeroDocumentIntaker" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
@@ -33,7 +73,20 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint enabled="false" file="/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker/Controllers/UploadController.cs" relfile="XeroDocumentIntaker/Controllers/UploadController.cs" line="33" column="1" />
+      <Breakpoint enabled="false" file="/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker/Controllers/UploadController.cs" relfile="XeroDocumentIntaker/Controllers/UploadController.cs" line="31" column="1" />
+      <Breakpoint enabled="false" file="/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker/Controllers/UploadController.cs" relfile="XeroDocumentIntaker/Controllers/UploadController.cs" line="39" column="1" />
+      <Breakpoint enabled="false" file="/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker/Controllers/UploadController.cs" relfile="XeroDocumentIntaker/Controllers/UploadController.cs" line="47" column="1" />
+      <Breakpoint enabled="false" file="/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker/Controllers/UploadController.cs" relfile="XeroDocumentIntaker/Controllers/UploadController.cs" line="55" column="1" />
+      <Breakpoint enabled="false" file="/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker.tests/ControllerTest.cs" relfile="XeroDocumentIntaker.tests/ControllerTest.cs" line="62" column="1" />
+      <Breakpoint enabled="false" file="/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker.tests/ControllerTest.cs" relfile="XeroDocumentIntaker.tests/ControllerTest.cs" line="63" column="1" />
+      <Breakpoint enabled="false" file="/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker.tests/ControllerTest.cs" relfile="XeroDocumentIntaker.tests/ControllerTest.cs" line="61" column="1" />
+      <Breakpoint enabled="false" file="/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker.tests/ControllerTest.cs" relfile="XeroDocumentIntaker.tests/ControllerTest.cs" line="55" column="1" />
+      <Breakpoint enabled="false" file="/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker.tests/ControllerTest.cs" relfile="XeroDocumentIntaker.tests/ControllerTest.cs" line="55" column="1" />
+      <Breakpoint enabled="false" file="/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker.tests/ControllerTest.cs" relfile="XeroDocumentIntaker.tests/ControllerTest.cs" line="37" column="1" />
+      <Breakpoint enabled="false" file="/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker.tests/ControllerTest.cs" relfile="XeroDocumentIntaker.tests/ControllerTest.cs" line="47" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

@@ -7,6 +7,9 @@ using System.Text.RegularExpressions;
 
 namespace XeroDocumentIntaker.Utils
 {
+    /// <summary>
+    /// Helper utility for report extraction
+    /// </summary>
     public static class ReportHelper
     {
 
@@ -14,8 +17,9 @@ namespace XeroDocumentIntaker.Utils
         /// Convert PDF to Text
         /// </summary>
         /// <param name="filePath"></param>
-        public static void ConvertPDFToText(String filePath)
+        public static bool ConvertPDFToText(String filePath)
         {
+            bool isSuccess = false;
             try
             {
                 var escapedArgs = filePath.Replace("\"", "\\\"");
@@ -24,7 +28,7 @@ namespace XeroDocumentIntaker.Utils
                 {
                     StartInfo = new ProcessStartInfo
                     {
-                        FileName = "pdftotext",
+                        FileName = Constants.PDF_TO_TEXT_COMMAND,
                         Arguments = escapedArgs + "  " + "-layout",
                         RedirectStandardOutput = true,
                         UseShellExecute = false,
@@ -34,25 +38,43 @@ namespace XeroDocumentIntaker.Utils
                 process.Start();
                 string result = process.StandardOutput.ReadToEnd();
                 process.WaitForExit();
+                isSuccess = true;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
+            return isSuccess;
         }
 
-
+        /// <summary>
+        /// Extract report from file path
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="uploadedBy"></param>
+        /// <returns></returns>
         public static Report ExtractReport(String filePath, String uploadedBy)
         {
-            Report rep = new Report();
-            rep.ReportDetails = new ReportDetail();
-            rep.UploadedBy = uploadedBy;
-            ReadFromFile(rep,filePath);
-            return rep;
+            Report report = new Report();
+            try
+            { 
+         
+                report.UploadedBy = uploadedBy;
+                ReadFromFile(report, filePath);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return report;
 
         }
 
+        /// <summary>
+        /// Parse columnar data to extract specific fiellds
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
         private static String[] ParseTabularData(String line)
         {
             return System.Text.RegularExpressions.Regex.Split(line, @"\s{2,}");
@@ -60,7 +82,7 @@ namespace XeroDocumentIntaker.Utils
 
 
         //Read text from pdf converted text file 
-        public static void ReadFromFile(Report report, String filePath)
+        private static void ReadFromFile(Report report, String filePath)
         {
             ReportDetail rep = new ReportDetail();
 
@@ -70,22 +92,27 @@ namespace XeroDocumentIntaker.Utils
                 report.FileSize = file.BaseStream.Length;
                 int lineCount = 0;
                 string ln;
-                String prevline = String.Empty;
+                String prevline = String.Empty; 
                 while ((ln = file.ReadLine()) != null)
                 {
                     ln = ln.Trim();
                     if (ln != "")
                     {
-                        if (lineCount == 3)
-                        {
-                            rep.InvoiceDate = ParseTabularData(ln)[1];
-                        }
-                        if (lineCount == 4)
+                 
+                        if (prevline == Constants.INVOICE)
                         {
                             rep.Vendor = ln;
+                            prevline = "";
                         }
+                        //First Extract fields by line position
+                        if (ln.StartsWith(Constants.INVOICE) && !ln.Contains("Invoice Receipt"))
+                        {
+                            rep.InvoiceDate = ParseTabularData(ln)[1];
+                            prevline = Constants.INVOICE;
 
-                        if (ln.StartsWith("Tax"))
+                        }
+                        // Extract by prefix
+                        if (ln.StartsWith(Constants.TAX_PREFIXED))
                         {
                             //tax
                             String[] cols = ParseTabularData(ln);
@@ -94,9 +121,9 @@ namespace XeroDocumentIntaker.Utils
                             rep.Tax = result;
 
                         }
-                        if (ln.StartsWith("Paid"))
+                        if (ln.StartsWith(Constants.PAID))
                         {
-                            //tax
+                            //Amount paid
                             String[] cols = ParseTabularData(ln);
                             String taxString = Regex.Match(cols[1], @"\d+.+\d").Value;
                             Decimal.TryParse(taxString, out decimal result);
@@ -104,9 +131,9 @@ namespace XeroDocumentIntaker.Utils
                             prevline =  "Paid";
 
                         }
-                        if (prevline == "Paid")
+                        if (prevline == Constants.PAID)
                         {
-                            //tax
+                            //Amount paid
                             String[] cols = ParseTabularData(ln);
                             String taxString = Regex.Match(cols[0], @"\d+.+\d").Value;
                             Decimal.TryParse(taxString, out decimal result);
@@ -115,15 +142,15 @@ namespace XeroDocumentIntaker.Utils
 
                         }
 
-                        if (prevline == "Total Due")
+                        if (prevline == Constants.TOTAL_DUE)
                         {
                             rep.Currency = ln;
                             prevline = "";
                         }
 
-                        if (ln.StartsWith("Total Due"))
+                        if (ln.StartsWith(Constants.TOTAL_DUE))
                         {
-                            prevline = "Total Due";
+                            prevline = Constants.TOTAL_DUE;
                         } 
                   
                         lineCount++;
@@ -136,8 +163,6 @@ namespace XeroDocumentIntaker.Utils
               
             }
         }
-
-
 
     }
 

@@ -26,11 +26,14 @@ namespace XeroDocumentIntaker.Controllers
         [Route("upload")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [RequestFormLimits(KeyLengthLimit =100000000)]
         public IActionResult UploadFile([FromForm] string UploadedBy)
         {
             var request = HttpContext.Request;
 
+            if(String.IsNullOrEmpty(UploadedBy))
+            {
+                return BadRequest("UploadedBy cannot be empty");
+            }
             if (request.Form.Files.Count > 0)
             {
                 IFormFile file = request.Form.Files.First();
@@ -40,30 +43,47 @@ namespace XeroDocumentIntaker.Controllers
                 {
                     file.CopyTo(st);
                 }
+                //Convert PDF to Text
                 ReportHelper.ConvertPDFToText(path + "  " + outputPath);
+                // Extract report fields
                 Report rep = ReportHelper.ExtractReport(outputPath, UploadedBy);
-                _reportService.SaveReport(rep);
 
+                //Save report
+                _reportService.SaveReport(rep);
 
                 return Ok("file uploaded successfully");
             }
-            return BadRequest("Not a valid file");
+            return BadRequest("Invalid file");
 
         }
 
+        /// <summary>
+        /// Get Report by report Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         [Route("document")]
-        public Report GetReportById(long id)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetReportById(long id)
         {
-            return this._reportService.GetReportById(id);
+            if(id < 1)
+            {
+                return BadRequest("Invalid report Id");
+            }
+            return Ok(this._reportService.GetReportById(id));
         }
 
+        /// <summary>
+        /// Return report statistics
+        /// </summary>
+        /// <returns></returns>
         [Route("stats")]
-        public List<FileUploadStatics> GetStatistics()
+        public IActionResult GetStatistics()
         {
-            return this._reportService.GetStatistics();
+            return Ok(this._reportService.GetStatistics());
         }
 
       
     }
-}
+} 

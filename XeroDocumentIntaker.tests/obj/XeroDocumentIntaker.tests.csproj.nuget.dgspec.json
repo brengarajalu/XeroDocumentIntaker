@@ -1,0 +1,195 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker.tests/XeroDocumentIntaker.tests.csproj": {}
+  },
+  "projects": {
+    "/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker.tests/XeroDocumentIntaker.tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker.tests/XeroDocumentIntaker.tests.csproj",
+        "projectName": "XeroDocumentIntaker.tests",
+        "projectPath": "/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker.tests/XeroDocumentIntaker.tests.csproj",
+        "packagesPath": "/Users/SwathiBala/.nuget/packages/",
+        "outputPath": "/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker.tests/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/SwathiBala/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker/XeroDocumentIntaker.csproj": {
+                "projectPath": "/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker/XeroDocumentIntaker.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNet.WebApi.Core": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.5.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.14.5, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.12.0, )"
+            },
+            "NUnit.Console": {
+              "target": "Package",
+              "version": "[3.11.1, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[3.17.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker/XeroDocumentIntaker.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker/XeroDocumentIntaker.csproj",
+        "projectName": "XeroDocumentIntaker",
+        "projectPath": "/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker/XeroDocumentIntaker.csproj",
+        "packagesPath": "/Users/SwathiBala/.nuget/packages/",
+        "outputPath": "/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/SwathiBala/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
+            "Microsoft.AspNetCore.SpaServices.Extensions": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Abstractions": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite.Core": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "dbup-add-migration": {
+              "target": "Package",
+              "version": "[1.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

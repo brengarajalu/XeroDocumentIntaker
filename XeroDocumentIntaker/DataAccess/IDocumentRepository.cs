@@ -8,6 +8,6 @@ namespace XeroDocumentIntaker.DataAccess
     {
         public int SaveReport(Report report);
         public Report GetReportById(long id);
-        public List<Report> GetAllReports();
+        public List<Report> GetReportStatistics();
     }
 }
