@@ -10,7 +10,8 @@ https://github.com/balajiren/XeroDocumentIntaker/blob/initial/XeroDocumentIntake
 
 Steps to build and run the code:
 1. First build the code using the command "dotnet build"
-2. Then use command "dotnet run --project "XeroDocumentIntaker.csproj" --urls "https://localhost:5001" to run the project 
+2. Then use command "dotnet run --project "XeroDocumentIntaker.csproj" --urls "https://localhost:5001" to run the project
+3. If you wish to use a different port, it can be modified in the config file under https://github.com/balajiren/XeroDocumentIntaker/blob/initial/XeroDocumentIntaker/ClientApp/src/config.js 
 
 Steps to run Unit tests:
 1. First build the code using the command "dotnet build"
