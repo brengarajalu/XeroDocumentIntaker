@@ -3,8 +3,9 @@ import ReactTable from 'react-table';
 import Modal from 'react-modal';
 import "react-table/react-table.css";
 import axios from 'axios';
+import config from '../config';
 
-const baseRestAPIPath = "https://localhost:5001/api";
+let baseRestAPIPath = config.baseurl
 
 const divStyleBlock = {
     display: 'block' as const,

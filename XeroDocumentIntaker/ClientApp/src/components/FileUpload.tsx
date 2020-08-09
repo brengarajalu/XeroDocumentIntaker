@@ -1,12 +1,13 @@
 ﻿import React from 'react';
 import axios from 'axios';
 import ReactTableView from './ReactTableView';
+import config from '../config'
 
 interface IState {
     selectedFile: number;
 }
 
-const baseRestAPIPath = "https://localhost:5001/api";
+let baseRestAPIPath = config.baseurl
 class Fileupload extends React.Component {
 
     //global state definition

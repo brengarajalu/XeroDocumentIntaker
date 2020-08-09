@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hbDiNABSv3IlvYzRBnGaXOE8WuBotFBFBoPs5VxHfRjhbveb/vS610+8ya8jjXNxcMnkMbrkTOGtafnrPFKVJg==",
+  "dgSpecHash": "SXq9ZWrJ7UI1DkUOEm2EQJh6j6Sl0AM19468TS5LDL9CPIoljj+PQxfh5MNGwOhnLHJQj3g/S4dAqZ8laH5ixQ==",
   "success": true,
   "projectFilePath": "/Users/SwathiBala/Projects/XeroDocumentIntaker/XeroDocumentIntaker.tests/XeroDocumentIntaker.tests.csproj",
   "expectedPackageFiles": [
@@ -54,7 +54,7 @@
     "/Users/SwathiBala/.nuget/packages/microsoft.win32.systemevents/4.7.0/microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "/Users/SwathiBala/.nuget/packages/moq/4.14.5/moq.4.14.5.nupkg.sha512",
     "/Users/SwathiBala/.nuget/packages/netstandard.library/2.0.0/netstandard.library.2.0.0.nupkg.sha512",
-    "/Users/SwathiBala/.nuget/packages/newtonsoft.json/12.0.2/newtonsoft.json.12.0.2.nupkg.sha512",
+    "/Users/SwathiBala/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512",
     "/Users/SwathiBala/.nuget/packages/newtonsoft.json.bson/1.0.1/newtonsoft.json.bson.1.0.1.nupkg.sha512",
     "/Users/SwathiBala/.nuget/packages/nuget.frameworks/5.0.0/nuget.frameworks.5.0.0.nupkg.sha512",
     "/Users/SwathiBala/.nuget/packages/nunit/3.12.0/nunit.3.12.0.nupkg.sha512",
