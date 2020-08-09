@@ -98,14 +98,13 @@ namespace XeroDocumentIntaker.Utils
                     ln = ln.Trim();
                     if (ln != "")
                     {
-                 
                         if (prevline == Constants.INVOICE)
                         {
                             rep.Vendor = ln;
                             prevline = "";
                         }
                         //First Extract fields by line position
-                        if (ln.StartsWith(Constants.INVOICE) && !ln.Contains("Invoice Receipt"))
+                        if (ln.StartsWith(Constants.INVOICE) && !ln.Contains(Constants.INVOICE_RECEIPT))
                         {
                             rep.InvoiceDate = ParseTabularData(ln)[1];
                             prevline = Constants.INVOICE;
@@ -128,7 +127,7 @@ namespace XeroDocumentIntaker.Utils
                             String taxString = Regex.Match(cols[1], @"\d+.+\d").Value;
                             Decimal.TryParse(taxString, out decimal result);
                             rep.TotalAmount = result;
-                            prevline =  "Paid";
+                            prevline = Constants.PAID;
 
                         }
                         if (prevline == Constants.PAID)

@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import axios from 'axios';
+import ReactTableView from './ReactTableView';
 
 interface IState {
     selectedFile: number;
@@ -9,14 +10,15 @@ const baseRestAPIPath = "https://localhost:5001/api";
 class Fileupload extends React.Component {
 
     //global state definition
-    readonly state = { selectedFile: '', uploadedBy: '', uploadStatus: 'N/A' };
+    readonly state = { selectedFile: '', uploadedBy: '', uploadStatus: 'N/A', showStats: false };
    
     constructor(props : any) {
         super(props);
         this.state = {
             selectedFile: '',
             uploadedBy: '',
-            uploadStatus:'N/A'
+            uploadStatus: 'N/A',
+            showStats: false
      
         };
         this.onFormSubmit = this.onFormSubmit.bind(this)
@@ -25,7 +27,8 @@ class Fileupload extends React.Component {
     onFormSubmit(e) {
         e.preventDefault() // Stop form submit
         this.submit(e).then((response) => {
-            this.setState({ uploadStatus: response.data });
+            this.setState({ uploadStatus: response.data, showStats:true });
+    
         })
     }
 
@@ -75,7 +78,16 @@ class Fileupload extends React.Component {
                     }}>Upload Status : {this.state.uploadStatus}</div>
              
                 </form>
+                <br />
+                <div>
+                    {this.state.showStats?
+                        <ReactTableView /> :
+                        null
+                    }
+                    
+                </div>
             </div>
+           
         )
     }
 }

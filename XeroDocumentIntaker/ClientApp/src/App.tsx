@@ -11,10 +11,7 @@ function App() {
     return (
         <div className="App">
             <Fileupload></Fileupload>
-            <br /><br />
-            <div>
-                <ReactTableView></ReactTableView>
-            </div>
+            
 
             
         </div>

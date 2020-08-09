@@ -44,10 +44,7 @@ class ReactTableView extends React.Component {
 
         this.setState({ showInfo: true });
         axios.get(baseRestAPIPath+"/upload/document?id=" + source.id).then(response => {
-            //console.log(response.data);
             this.setState({ selectedDetail: response.data });
-      
-            //console.log(this.state.selectedDetail);
         });
     }; 
 
